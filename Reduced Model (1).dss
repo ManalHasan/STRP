@@ -1,0 +1,111 @@
+Clear
+Set DefaultBaseFrequency=50
+new circuit.DEWAckt
+~ basekv=150 pu=1.05 phases=3 bus1=sourcebus
+
+//Step-down transformer from 150 kV to 12.66 kV
+new transformer.t1 xhl=6
+~ wdg=1 bus=sourcebus conn=wye kV=150  kVA=400000 %r=0.05
+~ wdg=2 bus=1 conn=delta   kV=12.66  kVA=400000 %r=0.05
+
+// Define lines
+New line.1-2 Bus1=1 Bus2=2 R1=0.0922 X1=0.0477
+New line.2-3 Bus1=2 Bus2=3 R1=0.493 X1=0.2511
+New line.3-4 Bus1=3 Bus2=4 R1=0.366 X1=0.1864
+New line.4-5 Bus1=4 Bus2=5 R1=0.3811 X1=0.1941
+New line.5-6 Bus1=5 Bus2=6 R1=0.819 X1=0.707
+New line.6-7 Bus1=6 Bus2=7  R1=0.002787281339429054 X1=0.002352451178362095
+New line.2-19 Bus1=2 Bus2=19 R1=0.164 X1=0.1565
+New line.2-20 Bus1=19 Bus2=20 R1=1.5042 X1=1.3554
+New line.20-21 Bus1=20 Bus2=21 R1=0.4095 X1=0.4784
+New line.21-22 Bus1=21 Bus2=22 R1=0.7089 X1=0.9373
+New line.3-23 Bus1=3 Bus2=23 R1=0.4512 X1=0.3083
+New line.23-24 Bus1=23 Bus2=24 R1=0.898 X1=0.7091
+New line.24-25 Bus1=24 Bus2=25 R1=0.896 X1=0.7011
+New line.6-26 Bus1=6 Bus2=26 R1=0.203 X1=0.1034
+New line.26-27 Bus1=26 Bus2=27 R1=0.2842 X1=0.1447
+New line.27-28 Bus1=27 Bus2=28 R1=1.059 X1=0.9337
+New line.28-29 Bus1=28 Bus2=29 R1=0.8042 X1=0.7006
+New line.29-30 Bus1=29 Bus2=30 R1=0.5075 X1=0.2585
+New line.30-31 Bus1=30 Bus2=31 R1=0.9744 X1=0.963
+New line.31-32 Bus1=31 Bus2=32 R1=0.3105 X1=0.3619
+New line.32-33 Bus1=32 Bus2=33 R1=0.341 X1=0.5302
+
+
+
+// Loads at 12.66 kV with ZIPV model
+New Load.2 Bus1=2 kW=100 kvar=60 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.3 Bus1=3 kW=90 kvar=40 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.4 Bus1=4 kW=120 kvar=80 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.5 Bus1=5 kW=60 kvar=30 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.6 Bus1=6 kW=60 kvar=20 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+
+New Load.7 Bus1=7 kW=217.08206842698382 kvar=102.64205965261854 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+~ zipv=[0.9038120158787039, 0.09618798412129614, 0.0, 0.0, 0.6102962066878249, 0.3897037933121751, 0.0] model=8
+
+New Load.8 Bus1=7 kW=208.26924652572433 kvar=101.68344003034973 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+~ zipv=[0.805631491249409, 0.09833896846255938, 0.09602954028803146, 0.0, 0.7049667085314401, 0.2950332914685599, 0.0] model=8
+
+New Load.9 Bus1=7 kW=61.496145950748215 kvar=20.24791712175663 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+~ zipv=[0.603684502405172, 0.3963154975948279, 0.0, 0.0, 0.802448816046271, 0.19755118395372886, 0.0] model=8
+
+New Load.10 Bus1=7 kW=60.80370903564651 kvar=20.09345413716755 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+~ zipv=[1.0000000000000002, 0.0, 0.0, 0.0, 0.7013952922657737, 0.2986047077342264, 0.0] model=8
+
+New Load.11 Bus1=7 kW=45.108121514268774 kvar=30.03323982782235 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+~ zipv=[0.6007745533970168, 0.0999445289587043, 0.29928091764427894, 0.0, 0.6004427071872753, 0.3995572928127247, 0.0] model=8
+
+New Load.12 Bus1=7 kW=60.012305608643494 kvar=20.001139343302576 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+~ zipv=[0.9000205051422683, 0.0, 0.09997949485773178, 0.0, 0.5000284819600278, 0.49997151803997214, 0.0] model=8
+
+New Load.13 Bus1=7 kW=59.47204089354683 kvar=19.955881756582933 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+~ zipv=[0.7982245132384199, 0.0, 0.20177548676157994, 0.0, 0.39867352661370076, 0.6013264733862992, 0.0] model=8
+
+New Load.14 Bus1=7 kW=118.15318137508785 kvar=78.7687875833919 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+~ zipv=[1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0] model=8
+
+New Load.15 Bus1=7 kW=59.46937702399146 kvar=19.67876496217904 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+~ zipv= [0.3970870242190052, 0.30023618815064285, 0.30267678763035205, 1.0, 0.0, 0.0, 0.0] model=8
+
+New Load.16 Bus1=7 kW=58.78488311679444 kvar=19.857511254966692 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+~ zipv=[1.0, 0.0, 0.0, 0.0, 0.697847332278394, 0.30215266772160587, 0.0] model=8
+
+New Load.17 Bus1=7 kW=88.13317226741219 kvar=39.736619964310485 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+~ zipv= [0.8990024725354437, 0.10099752746455627, 0.0, 0.0, 0.5973487424353046, 0.40265125756469544, 0.0] model=8
+
+New Load.18 Bus1=7 kW=87.83734224852184 kvar=39.73140199614073 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+~ zipv=[0.7978278788731737, 0.2021721211268264, 0.0, 0.0, 0.49661982726049597, 0.5033801727395041, 0.0] model=8
+
+New Load.19 Bus1=9 kW=60 kvar=20 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.20 Bus1=10 kW=60 kvar=20 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.21 Bus1=11 kW=45 kvar=30 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.22 Bus1=12 kW=60 kvar=20 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.23 Bus1=13 kW=60 kvar=20 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.24 Bus1=14 kW=120 kvar=80 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.25 Bus1=15 kW=60 kvar=20 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.26 Bus1=16 kW=60 kvar=20 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.27 Bus1=17 kW=90 kvar=40 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.28 Bus1=18 kW=90 kvar=40 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.29 Bus1=19 kW=90 kvar=40 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.30 Bus1=20 kW=90 kvar=40 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.31 Bus1=21 kW=90 kvar=40 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.32 Bus1=22 kW=90 kvar=40 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.33 Bus1=23 kW=90 kvar=50 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.34 Bus1=24 kW=420 kvar=200 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.35 Bus1=25 kW=420 kvar=200 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.36 Bus1=26 kW=60 kvar=25 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.37 Bus1=27 kW=60 kvar=25 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.38 Bus1=28 kW=60 kvar=20 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.39 Bus1=29 kW=120 kvar=70 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.40 Bus1=30 kW=60 kvar=20 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.41 Bus1=31 kW=60 kvar=20 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.42 Bus1=32 kW=90 kvar=40 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+New Load.43 Bus1=33 kW=90 kvar=40 kv=12.66 vminpu=0.95 vmaxpu=1.05 
+
+
+// Solve the circuit
+set voltagebases=[12.66,150]
+calcvoltagebases
+set maxcontroliter=100
+solve
+!Visualize powers "Generator.PV"
